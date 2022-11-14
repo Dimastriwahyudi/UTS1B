@@ -1,95 +1,88 @@
-import  java.util.Arrays;
 import java.util.Random;
-import  java.util.Scanner;
+import java.util.Scanner;
 
 public class main {
-
-    int jumlahProdi = 3;
-    static int totalpenerimamaba = 1050;
+    int JumlahProdi = 3;
+    static int totalJumlahMahasiswa = 1050;
     public static String[] TI = new String[500];
-    public static String[] DKV = new String[300];
-    public static String[] TK = new String[250];
+    public static String [] DKV = new String[300];
+    public static String [] TeknikKomputer = new String[250];
 
-    public static void infomaba() {
-        int NIKTI= 0;
-        int sisakouta = 0;
+    public static void PrintInfoPendaftaran() {
+        int totalTI = 0;
+        int totalSisaKuota = 0;
         for (int index = 0; index < TI.length; index++) {
             if (TI[index] != null) {
-                NIKTI++;
+                totalTI++;
             }
         }
-        int NIKDKV = 0;
+        int totalDKV = 0;
         for (int index = 0; index < DKV.length; index++) {
             if (DKV[index] != null) {
-                NIKDKV++;
+                totalTI++;
             }
         }
-        int NIKTK= 0;
-        for (int index = 0; index < TK.length; index++) {
-            if (TK[index] != null) {
-                NIKTK++;
+        int totalTeknikKomputer = 0;
+        for (int index = 0; index < TeknikKomputer.length; index++) {
+            if (TeknikKomputer[index] != null) {
+                totalTeknikKomputer++;
             }
         }
-        sisakouta = totalpenerimamaba - NIKTI - NIKDKV - NIKTK;
-        System.out.println("nik anda : " + NIKTI + " | nik anda : " + NIKDKV + " | nik anda : " + NIKTI);
-        System.out.println("jumlah Seluruh Maba : " + totalpenerimamaba + "Total Sisa Kouta:" + sisakouta);
+        totalSisaKuota = totalJumlahMahasiswa - totalTI - totalDKV - totalTeknikKomputer;
+        System.out.println("Total Mahasiswa TI : " + totalTI + " | Total Mahasiswa DKV : " + totalDKV + " | Total Mahasiswa Teknik Komputer : " + totalTeknikKomputer);
+        System.out.println("Jumlah Seluruh Mahasiswa : " + totalJumlahMahasiswa + " | Total Sisa Kuota : " + totalSisaKuota);
         System.out.println();
     }
 
-    public static void checkindexarray(String[] myArray, String Maba) {
+    public static void CheckIndexArray(String[] myArray, String mahasiswa){
         int indexNow = 0;
-        for (int index = 0; index < myArray.length; index++) {
-            if (myArray[index] != null) {
-                indexNow = index + 1;
+        for(int index = 0; index < myArray.length; index++){
+            if(myArray[index] !=null){
+                indexNow = index+1;
             }
         }
-        if (indexNow< myArray.length){
-            myArray[indexNow] = Maba;
+        if(indexNow < myArray.length){
+            myArray[indexNow] = mahasiswa;
         }
     }
-
-
-
-    public static void simpanMaba(int angkaRandom , String Maba) {
-
-
+    public static void simpanMahasiswa(int angkaRandom, String mahasiswa){
         switch (angkaRandom){
             case 1:
-                checkindexarray(TI,Maba);
-                System.out.println("Nik anda : ");
-                infomaba();
+                CheckIndexArray(TI,mahasiswa);
+                System.out.println("Anda Mendapat Nik : TI22"+ angkaRandom);
+                PrintInfoPendaftaran();
                 break;
             case 2:
-                checkindexarray(DKV,Maba);
-                System.out.println("Nik anda : ");
-                infomaba();
+                CheckIndexArray(DKV,mahasiswa);
+                System.out.println("Anda Mendapat Nik : DK22"+ angkaRandom);
+                PrintInfoPendaftaran();
                 break;
             case 3:
-                checkindexarray(TK,Maba);
-                System.out.println("Nik anda : ");
-                infomaba();
+                CheckIndexArray(TeknikKomputer,mahasiswa);
+                System.out.println("Anda Mendapat Nik : TK22"+ angkaRandom);
+                PrintInfoPendaftaran();
                 break;
         }
-
     }
-
-    public static void inputMaba() {
+    private static void inputMahasiswa() {
         Scanner inputData = new Scanner(System.in);
-        while (true){
-            System.out.println("Nama = ");
-            String namamaba = inputData.nextLine();
-            if(namamaba.isBlank()){
-                System.out.println("Nama Wajib biisi");
-                inputMaba();
-            }else {
+        while (true) {
+            System.out.println("Nama Mahasiswa : ");
+            String namaSiswa = inputData.nextLine();
+            System.out.println("Prodi : ");
+            String prodi = inputData.nextLine();
+            if (namaSiswa.isBlank()) {
+                System.out.println("Nama Mahasiswa Wajib Diisi");
+                inputMahasiswa();
+            } else {
                 Random hasilRandom = new Random();
-                int JenisRandom = hasilRandom.nextInt(3)+1;
-                simpanMaba(JenisRandom,namamaba);
+                int JenisRandom = hasilRandom.nextInt(3) + 1;
+                simpanMahasiswa(JenisRandom, namaSiswa);
             }
         }
     }
 
     public static void main(String[] args) {
-        inputMaba();
+        inputMahasiswa();
     }
 }
